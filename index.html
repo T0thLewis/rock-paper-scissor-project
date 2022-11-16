@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors game</title>
+</head>
+<body>
+    <script>
+
+        const choices = ["Rock", "Paper", "Scissors"];
+        let playerScore = 0;
+        let computerScore = 0;
+
+        //Function to make player input case-insensitive and check if input is correct
+        function playerChoiceCheck(playerChoice) {
+            for (let i = 0; i <= 2; i++) {
+                if (choices[i].toLowerCase() === playerChoice.toLowerCase()) {
+                    return choices[i];
+                    break;
+                }
+            }
+
+            alert("Your selection is invalid, please input a valid selection!");
+        }
+
+        //Generates computer choice for the game
+        function getComputerChoice() {
+            const randomNumber = Math.floor(Math.random() * 3);
+
+            switch(randomNumber) {
+                case 0:
+                    return choices[0];
+                    break;
+                case 1:
+                    return choices[1];
+                    break;
+                case 2:
+                    return choices[2];
+            }
+        }
+
+        
+        for (let i = 0; i < 5; i++) {
+
+            const playerChoice = playerChoiceCheck(prompt("Rock, Paper or Scissors?"));
+            const computerChoice = getComputerChoice();
+
+            playRound(playerChoice, computerChoice, choices);
+            console.log(`Player = ${playerScore} | Computer = ${computerScore}`);
+
+        }
+
+        //The game rule to determine outcome and add a point to the winner
+        function playRound(playerChoice, computerChoice, choices) {
+            if (playerChoice === choices[0] && computerChoice === choices[1]) {
+                console.log("Paper beats Rock. Computer wins! Player");
+                computerScore++;
+            } else if ( playerChoice === choices[1] && computerChoice === choices[0]) {
+                console.log("Paper beats Rock. Player wins!");
+                playerScore++;
+            } else if (playerChoice === choices[2] && computerChoice === choices[0]) {
+                console.log("Rock beats Scissors. Computer Wins!");
+                computerScore++;
+            } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
+                console.log("Rock beats Scissors. Player Wins!");
+                playerScore++;
+            } else if (playerChoice === choices[1] && computerChoice === choices[2]) {
+                console.log("Scissors beat Paper, Computer Wins!");
+                computerScore++;
+            } else if (playerChoice === choices[2] && computerChoice === choices[1]) {
+                console.log("Scissors beat Paper, Player Wins!");
+                playerScore++;
+            } else {
+                console.log("You both chose the same!");
+            }
+        }
+
+        //Determines final outcome and announces the result
+        if (playerScore > computerScore) {
+            console.log("Congratulations! You win!");
+        } else if (computerScore > playerScore) {
+            console.log("The Computer wins!");
+        } else {
+            console.log("It's a tie!");
+        }
+
+    </script>
+</body>
+</html>
