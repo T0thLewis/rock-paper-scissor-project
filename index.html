@@ -12,13 +12,13 @@
         const choices = ["Rock", "Paper", "Scissors"];
         let playerScore = 0;
         let computerScore = 0;
-        game();
+        playGame();
 
         //Function to run the game for 5 rounds
-        function game () {
+        function playGame() {
             for (let i = 0; i < 5; i++) {
 
-                const playerChoice = playerChoiceCheck();
+                const playerChoice = checkPlayerChoice();
                 const computerChoice = getComputerChoice();
 
                 console.log(playRound(playerChoice, computerChoice, choices));
@@ -37,7 +37,7 @@
         }
 
         //Recursive function to make player input case-insensitive and check if input is correct
-        function playerChoiceCheck() {
+        function checkPlayerChoice() {
             let playerChoice = prompt("Rock, Paper or Scissors?");
             
             switch(playerChoice.toLowerCase()) {
@@ -52,7 +52,7 @@
                     break;
                 default:
                     alert("Your input is invalid, please input a valid choice.");
-                    return playerChoiceCheck();
+                    return checkPlayerChoice();
             }
         }
 
