@@ -12,17 +12,48 @@
         const choices = ["Rock", "Paper", "Scissors"];
         let playerScore = 0;
         let computerScore = 0;
+        game();
 
-        //Function to make player input case-insensitive and check if input is correct
-        function playerChoiceCheck(playerChoice) {
-            for (let i = 0; i <= 2; i++) {
-                if (choices[i].toLowerCase() === playerChoice.toLowerCase()) {
-                    return choices[i];
-                    break;
-                }
+        //Function to run the game for 5 rounds
+        function game () {
+            for (let i = 0; i < 5; i++) {
+
+                const playerChoice = playerChoiceCheck();
+                const computerChoice = getComputerChoice();
+
+                console.log(playRound(playerChoice, computerChoice, choices));
+                console.log(`Player = ${playerScore} | Computer = ${computerScore}`);
+
             }
 
-            alert("Your selection is invalid, please input a valid selection!");
+            //Determines final outcome and announces the result
+            if (playerScore > computerScore) {
+                console.log("Congratulations! You win!");
+            } else if (computerScore > playerScore) {
+                console.log("The Computer wins!");
+            } else {
+                console.log("It's a tie!");
+            }
+        }
+
+        //Recursive function to make player input case-insensitive and check if input is correct
+        function playerChoiceCheck() {
+            let playerChoice = prompt("Rock, Paper or Scissors?");
+            
+            switch(playerChoice.toLowerCase()) {
+                case "rock":
+                    return choices[0];
+                    break;
+                case "paper":
+                    return choices[1];
+                    break;
+                case "scissors":
+                    return choices[2];
+                    break;
+                default:
+                    alert("Your input is invalid, please input a valid choice.");
+                    return playerChoiceCheck();
+            }
         }
 
         //Generates computer choice for the game
@@ -41,49 +72,33 @@
             }
         }
 
-        
-        for (let i = 0; i < 5; i++) {
-
-            const playerChoice = playerChoiceCheck(prompt("Rock, Paper or Scissors?"));
-            const computerChoice = getComputerChoice();
-
-            playRound(playerChoice, computerChoice, choices);
-            console.log(`Player = ${playerScore} | Computer = ${computerScore}`);
-
-        }
-
         //The game rule to determine outcome and add a point to the winner
         function playRound(playerChoice, computerChoice, choices) {
-            if (playerChoice === choices[0] && computerChoice === choices[1]) {
-                console.log("Paper beats Rock. Computer wins! Player");
-                computerScore++;
-            } else if ( playerChoice === choices[1] && computerChoice === choices[0]) {
-                console.log("Paper beats Rock. Player wins!");
-                playerScore++;
-            } else if (playerChoice === choices[2] && computerChoice === choices[0]) {
-                console.log("Rock beats Scissors. Computer Wins!");
-                computerScore++;
-            } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
-                console.log("Rock beats Scissors. Player Wins!");
-                playerScore++;
-            } else if (playerChoice === choices[1] && computerChoice === choices[2]) {
-                console.log("Scissors beat Paper, Computer Wins!");
-                computerScore++;
-            } else if (playerChoice === choices[2] && computerChoice === choices[1]) {
-                console.log("Scissors beat Paper, Player Wins!");
-                playerScore++;
-            } else {
-                console.log("You both chose the same!");
-            }
-        }
+            const gameRules = ["Paper beats Rock. ", "Rock beats Scissors. ", "Scissors beat paper. "];
+            const winner = ["Computer wins!", "Player wins!"];
+            let condition;
 
-        //Determines final outcome and announces the result
-        if (playerScore > computerScore) {
-            console.log("Congratulations! You win!");
-        } else if (computerScore > playerScore) {
-            console.log("The Computer wins!");
-        } else {
-            console.log("It's a tie!");
+            if (playerChoice === choices[0] && computerChoice === choices[1]) {
+                computerScore++;
+                return condition = gameRules[0].concat(winner[0]);
+            } else if ( playerChoice === choices[1] && computerChoice === choices[0]) {
+                playerScore++;
+                return condition = gameRules[0].concat(winner[1]);
+            } else if (playerChoice === choices[2] && computerChoice === choices[0]) {
+                computerScore++;
+                return condition = gameRules[1].concat(winner[0]);
+            } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
+                playerScore++;
+                return condition = gameRules[1].concat(winner[1]);
+            } else if (playerChoice === choices[1] && computerChoice === choices[2]) {
+                computerScore++;
+                return condition = gameRules[2].concat(winner[0]);
+            } else if (playerChoice === choices[2] && computerChoice === choices[1]) {
+                playerScore++;
+                return condition = gameRules[2].concat(winner[1]);
+            } else {
+                return condition = "You both chose the same!";
+            }
         }
 
     </script>
