@@ -26,7 +26,13 @@
 
             }
 
-            //Determines final outcome and announces the result
+            announceResults(playerScore, computerScore);
+           
+        }
+
+        //Determines final outcome and announces the result
+        function announceResults(playerScore, computerScore) {
+
             if (playerScore > computerScore) {
                 console.log("Congratulations! You win!");
             } else if (computerScore > playerScore) {
@@ -34,6 +40,7 @@
             } else {
                 console.log("It's a tie!");
             }
+
         }
 
         //Recursive function to make player input case-insensitive and check if input is correct
@@ -42,13 +49,13 @@
             
             switch(playerChoice.toLowerCase()) {
                 case "rock":
-                    return choices[0];
+                    return "rock";
                     break;
                 case "paper":
-                    return choices[1];
+                    return "paper";
                     break;
                 case "scissors":
-                    return choices[2];
+                    return "scissors";
                     break;
                 default:
                     alert("Your input is invalid, please input a valid choice.");
@@ -59,17 +66,7 @@
         //Generates computer choice for the game
         function getComputerChoice() {
             const randomNumber = Math.floor(Math.random() * 3);
-
-            switch(randomNumber) {
-                case 0:
-                    return choices[0];
-                    break;
-                case 1:
-                    return choices[1];
-                    break;
-                case 2:
-                    return choices[2];
-            }
+            return choices[randomNumber].toLowerCase();
         }
 
         //The game rule to determine outcome and add a point to the winner
@@ -78,22 +75,22 @@
             const winner = ["Computer wins!", "Player wins!"];
             let condition;
 
-            if (playerChoice === choices[0] && computerChoice === choices[1]) {
+            if (playerChoice === "rock" && computerChoice === "paper") {
                 computerScore++;
                 return condition = gameRules[0].concat(winner[0]);
-            } else if ( playerChoice === choices[1] && computerChoice === choices[0]) {
+            } else if ( playerChoice === "rock" && computerChoice === "paper") {
                 playerScore++;
                 return condition = gameRules[0].concat(winner[1]);
-            } else if (playerChoice === choices[2] && computerChoice === choices[0]) {
+            } else if (playerChoice === "scissors" && computerChoice === "rock") {
                 computerScore++;
                 return condition = gameRules[1].concat(winner[0]);
-            } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
+            } else if (playerChoice === "rock" && computerChoice === "scissors") {
                 playerScore++;
                 return condition = gameRules[1].concat(winner[1]);
-            } else if (playerChoice === choices[1] && computerChoice === choices[2]) {
+            } else if (playerChoice === "paper" && computerChoice === "scissors") {
                 computerScore++;
                 return condition = gameRules[2].concat(winner[0]);
-            } else if (playerChoice === choices[2] && computerChoice === choices[1]) {
+            } else if (playerChoice === "scissors" && computerChoice === "paper") {
                 playerScore++;
                 return condition = gameRules[2].concat(winner[1]);
             } else {
