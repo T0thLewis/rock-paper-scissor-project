@@ -6,9 +6,10 @@ body {
 }
 
 .container {
-    min-width: 30%;
     display: flex;
     flex-direction: column;
+    flex: auto;
+    max-width: 50%;
 }
 
 .header, .results, .buttons {
@@ -19,5 +20,10 @@ body {
 
 .buttons {
     flex-direction: row;
+    justify-content: center;
 
+}
+
+div, p {
+    border: 2px solid red;
 }
