@@ -27,12 +27,19 @@ function announceResults(playerScore, computerScore) {
 
 //Recursive function to make player input case-insensitive and check if input is correct
 function getPlayerChoice() {
+    const html = document.querySelector('.playerSelected');
+    console.dir(html);
+
     playerChoice = this.classList.value;
+    html.textContent = `You chose: ${playerChoice}`;
 }
 
 //Generates computer choice for the game
 function getComputerChoice() {
+    const html = document.querySelector('.computerSelected');
+
     const randomNumber = Math.floor(Math.random() * 3);
+    html.textContent = `Computer chose: ${choices[randomNumber]}`;
     return choices[randomNumber];
 }
 
@@ -40,24 +47,32 @@ function getComputerChoice() {
 function playRound(playerChoice, computerChoice) {
     const gameRules = ["Paper beats Rock. ", "Rock beats Scissors. ", "Scissors beat paper. "];
     const winner = ["Computer wins!", "Player wins!"];
+    const playerHTML = document.querySelector('.playerScore');
+    const computerHTML = document.querySelector('.computerScore');
 
     if (playerChoice === "rock" && computerChoice === "paper") {
         computerScore++;
+        computerHTML.textContent = `Computer's score: ${computerScore}`;
         return gameRules[0].concat(winner[0]);
     } else if (playerChoice === "rock" && computerChoice === "paper") {
         playerScore++;
+        playerHTML.textContent = `Player's score: ${playerScore}`;
         return gameRules[0].concat(winner[1]);
     } else if (playerChoice === "scissors" && computerChoice === "rock") {
         computerScore++;
+        computerHTML.textContent = `Computer's score: ${computerScore}`;
         return gameRules[1].concat(winner[0]);
     } else if (playerChoice === "rock" && computerChoice === "scissors") {
         playerScore++;
+        playerHTML.textContent = `Player's score: ${playerScore}`;
         return gameRules[1].concat(winner[1]);
     } else if (playerChoice === "paper" && computerChoice === "scissors") {
         computerScore++;
+        computerHTML.textContent = `Computer's score: ${computerScore}`;
         return gameRules[2].concat(winner[0]);
     } else if (playerChoice === "scissors" && computerChoice === "paper") {
         playerScore++;
+        playerHTML.textContent = `Player's score: ${playerScore}`;
         return gameRules[2].concat(winner[1]);
     } else {
         return "You both chose the same!";
